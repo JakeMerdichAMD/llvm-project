@@ -403,6 +403,8 @@ template <> struct MappingTraits<FormatStyle> {
     IO.mapOptional("AlignConsecutiveMacros", Style.AlignConsecutiveMacros);
     IO.mapOptional("AlignConsecutiveAssignments",
                    Style.AlignConsecutiveAssignments);
+    IO.mapOptional("AlignConsecutiveBitfields",
+                   Style.AlignConsecutiveBitfields);
     IO.mapOptional("AlignConsecutiveDeclarations",
                    Style.AlignConsecutiveDeclarations);
     IO.mapOptional("AlignEscapedNewlines", Style.AlignEscapedNewlines);

@@ -204,6 +204,18 @@ the configuration (without a prefix: ``Auto``).
     int b    = 23;
     int ccc  = 23;
 
+**AlignConsecutiveBitfields** (``bool``)
+  If ``true``, aligns consecutive bitfield members.
+
+  This will align the bitfield separator of consecutive lines. This
+  will result in formattings like
+
+  .. code-block:: c++
+
+    int aaaa : 1;
+    int b    : 12;
+    int ccc  : 8;
+
 **AlignConsecutiveDeclarations** (``bool``)
   If ``true``, aligns consecutive declarations.
 

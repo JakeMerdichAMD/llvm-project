@@ -108,6 +108,17 @@ struct FormatStyle {
   /// \endcode
   bool AlignConsecutiveAssignments;
 
+  /// If ``true``, aligns consecutive bitfield members.
+  ///
+  /// This will align the bitfield separators of consecutive lines. This
+  /// will result in formattings like
+  /// \code
+  ///   int aaaa : 1;
+  ///   int b    : 12;
+  ///   int ccc  : 8;
+  /// \endcode
+  bool AlignConsecutiveBitfields;
+
   /// If ``true``, aligns consecutive declarations.
   ///
   /// This will align the declaration names of consecutive lines. This

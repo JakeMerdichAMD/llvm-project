@@ -11955,6 +11955,51 @@ TEST_F(FormatTest, AlignConsecutiveAssignments) {
                Alignment);
 }
 
+TEST_F(FormatTest, AlignConsecutiveBitfields) {
+  FormatStyle Alignment = getLLVMStyle();
+  Alignment.AlignConsecutiveBitfields = true;
+  verifyFormat("int const a     : 5;\n"
+               "int oneTwoThree : 23;",
+               Alignment);
+
+  // Initializers are allowed starting with c++2a
+  verifyFormat("int const a     : 5 = 1;\n"
+               "int oneTwoThree : 23 = 0;",
+               Alignment);
+
+  Alignment.AlignConsecutiveDeclarations = true;
+  verifyFormat("int const a           : 5;\n"
+               "int       oneTwoThree : 23;",
+               Alignment);
+
+  verifyFormat("int const a           : 5;  // comment\n"
+               "int       oneTwoThree : 23; // comment",
+               Alignment);
+
+  verifyFormat("int const a           : 5 = 1;\n"
+               "int       oneTwoThree : 23 = 0;",
+               Alignment);
+
+  Alignment.AlignConsecutiveAssignments = true;
+  verifyFormat("int const a           : 5  = 1;\n"
+               "int       oneTwoThree : 23 = 0;",
+               Alignment);
+  verifyFormat("int const a           : 5  = {1};\n"
+               "int       oneTwoThree : 23 = 0;",
+               Alignment);
+
+  /*
+  // FIXME: currently ':' is only recognized as a bitfield colon
+  // when followed by a number.
+  verifyFormat("int oneTwoThree : SOME_CONSTANT;\n"
+               "int a           : 5;",
+               Alignment);
+  verifyFormat("int const a           : 5  = SOME_CONSTANT;\n"
+               "int       oneTwoThree : 23 = 0;",
+               Alignment);
+  */
+}
+
 TEST_F(FormatTest, AlignConsecutiveDeclarations) {
   FormatStyle Alignment = getLLVMStyle();
   Alignment.AlignConsecutiveMacros = true;
